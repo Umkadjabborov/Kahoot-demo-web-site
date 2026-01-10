@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+
+  <video class="bg-video" autoplay muted loop playsinline>
+  <source src="./img/100299-658807410_large.mp4" type="video/mp4">
+</video>
+<div class="bg-overlay"></div>
+
+<div class="login-box">
+  <h1>🎮 Quiz Game</h1>
+
+  <input id="playerNameInput" placeholder="Ismingizni kiriting">
+
+  <div class="topics">
+    <div class="topic" data-id="1">JavaScript Basics</div>
+    <div class="topic" data-id="2">HTML Fundamentals</div>
+    <div class="topic" data-id="3">CSS Basics</div>
+    <div class="topic" data-id="4">Web & Backend</div>
+  </div>
+
+  <button id="startBtn">Boshlash</button>
+</div>
+
+<script>
+let selectedTopic = null;
+
+document.querySelectorAll(".topic").forEach(t => {
+  t.onclick = () => {
+    document.querySelectorAll(".topic").forEach(x => x.classList.remove("active"));
+    t.classList.add("active");
+    selectedTopic = t.dataset.id;
+  };
+});
+
+document.getElementById("startBtn").onclick = () => {
+  const name = document.getElementById("playerNameInput").value.trim();
+  if (!name || !selectedTopic) {
+    alert("Ism va mavzuni tanlang");
+    return;
+  }
+
+  localStorage.setItem("playerName", name);
+  localStorage.setItem("topicId", selectedTopic);
+
+  window.location.href = "index.html";
+};
+</script>
+
+</body>
+</html>

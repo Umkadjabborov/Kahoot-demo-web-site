@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- VIDEO BACKGROUND -->
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="./img/100299-658807410_large.mp4" type="video/mp4">
+</video>
+<div class="bg-overlay"></div>
+
+<div class="hud">
+  <span><b id="playerLabel">---</b></span>
+  <span>🏆 Ball: <b id="score">0</b></span>
+  <span>⏱ <b id="timer">15</b>s</span>
+</div>
+
+<div class="container">
+
+  <!-- CLOUD / SUN -->
+  <div class="cloud-wrapper">
+    <img id="cloud-start" class="cloud" src="./Img/Без названия (1) 1.png">
+    <img id="sun-start" class="sun" src="./Img/Sun.png">
+
+    <img id="cloud-happy" class="cloud hidden" src="./Img/HappyCloud.png">
+    <img id="sun-happy" class="sun hidden" src="./Img/HappySun.png">
+
+    <img id="cloud-angry" class="cloud hidden" src="./Img/AngryCloud.png">
+    <img id="sun-angry" class="sun hidden" src="./Img/AngrySun.png">
+
+    <div id="rain" class="rain hidden"></div>
+  </div>
+
+  <!-- QUESTION -->
+  <div class="paper big">
+    <h2>Yuklanmoqda...</h2>
+  </div>
+
+  <!-- ANSWERS -->
+  <div class="answers">
+    <div class="paper small"></div>
+    <div class="paper small"></div>
+    <div class="paper small"></div>
+    <div class="paper small"></div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
