@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-  const API = "http://localhost:5000";
+const API = "https://kahoot-demo-backend-umidjon.onrender.com";
+
 
   /* =====================
      PLAYER + TOPIC
