@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-const API = "https://github.com/Umkadjabborov/Kahoot-demo-web-site/server";
+const API = "https://kahoot-demo-backend-umidjon.onrender.com";
+
 
 
   /* =====================
