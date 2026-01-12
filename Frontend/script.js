@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-const API = "https://kahoot-demo-backend-umidjon.onrender.com";
+const API = "http://localhost:5000";
 
 
   /* =====================
@@ -41,6 +41,8 @@ const API = "https://kahoot-demo-backend-umidjon.onrender.com";
   const scoreEl = document.getElementById("score");
   const timerEl = document.getElementById("timer");
   const playerLabel = document.getElementById("playerLabel");
+  
+
 
   playerLabel.textContent = playerName;
   scoreEl.textContent = score;
@@ -149,20 +151,65 @@ const API = "https://kahoot-demo-backend-umidjon.onrender.com";
   /* =====================
      FINISH GAME (OLD STYLE)
   ===================== */
-  function finishGame() {
-    clearInterval(timerInterval);
+ async function finishGame() {
+  clearInterval(timerInterval);
 
-    document.querySelector(".hud").style.display = "none";
-    document.querySelector(".cloud-wrapper").style.display = "none";
-    document.querySelector(".answers").style.display = "none";
+  document.querySelector(".hud").style.display = "none";
+  document.querySelector(".cloud-wrapper").style.display = "none";
+  document.querySelector(".answers").style.display = "none";
 
-    questionEl.innerHTML = `
-      🎉 ${playerName}<br>
-      Siz <b>${score}</b> ball to‘pladingiz!
-    `;
+  questionEl.innerHTML = `
+    🎉 ${playerName}<br>
+    Siz <b>${score}</b> ball to‘pladingiz!
+  `;
 
-    document.querySelector(".paper.big").classList.add("final");
-  }
+  document.querySelector(".paper.big").classList.add("final");
+
+  // ✅ RESULT SAQLASH
+  await fetch(`${API}/api/result`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: playerName,
+      score: score,
+      topic: localStorage.getItem("topicId")
+    })
+  });
+
+  // ✅ RESTART TUGMASINI KO‘RSATISH
+  restartBtn.classList.remove("hidden");
+
+  // ✅ NATIJALARNI YUKLASH (agar bo‘lsa)
+  loadResults();
+}
+
+const restartBtn  = document.getElementById("restartBtn");
+
+restartBtn.addEventListener("click", () => {
+  // topic saqlanib qolsin
+  localStorage.removeItem("topicId");
+
+  // login / topic sahifaga qaytadi
+  window.location.href = "login.html";
+});
+
+  
+
+async function loadResults() {
+  const res = await fetch(`${API}/api/results`);
+  const data = await res.json();
+
+  const list = document.getElementById("resultsList");
+  list.innerHTML = "";
+
+  data.forEach((r, i) => {
+    const li = document.createElement("li");
+    li.textContent = `${i + 1}. ${r.name} — ${r.score} ball`;
+    list.appendChild(li);
+  });
+
+  document.querySelector(".results").classList.remove("hidden");
+}
 
   /* =====================
      INIT

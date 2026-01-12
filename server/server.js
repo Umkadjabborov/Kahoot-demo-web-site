@@ -87,6 +87,30 @@ app.get("/api/questions/:id", (req, res) => {
   res.json(quiz.questions);
 });
 
+let results = [];
+// Natijalarni saqlash
+app.post("/api/result", (req, res) => {
+  const { name, score, topic } = req.body;
+
+  if (!name || score === undefined) {
+    return res.status(400).json({ message: "Invalid data" });
+  }
+
+  results.push({
+    name,
+    score,
+    topic,
+    time: new Date().toISOString()
+  });
+
+  res.json({ message: "Result saved" });
+});
+app.get("/api/results", (req, res) => {
+  res.json(
+    results.sort((a, b) => b.score - a.score).slice(0, 10)
+  );
+});
+
 /* =========================
    SERVER
 ========================= */
