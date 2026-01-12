@@ -1,7 +1,13 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-const API = "https://kahoot-demo-backend-umidjon.onrender.com";
+ const API = "https://kahoot-demo-web-site.onrender.com";
 
+  // savollarni olish
+  fetch(`${API}/api/questions/1`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+    });
 
 
   /* =====================
