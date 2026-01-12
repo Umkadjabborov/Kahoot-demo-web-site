@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-const API = "http://localhost:5000";
+const API = "https://github.com/Umkadjabborov/Kahoot-demo-web-site/server";
 
 
   /* =====================
