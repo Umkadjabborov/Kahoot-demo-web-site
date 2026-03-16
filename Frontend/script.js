@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
  const API = "https://kahoot-demo-web-site.onrender.com";
 
-  // savollarni olish
+  
   fetch(`${API}/api/questions/1`)
     .then(res => res.json())
     .then(data => {
@@ -10,9 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
 
-  /* =====================
-     PLAYER + TOPIC
-  ===================== */
+ 
   const playerName = localStorage.getItem("playerName");
   const topicId = localStorage.getItem("topicId");
 
@@ -21,17 +19,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  /* =====================
-     STATE
-  ===================== */
   let score = 0;
   let locked = false;
   let questions = [];
   let currentIndex = 0;
 
-  /* =====================
-     ELEMENTS (AVVALGIDEK)
-  ===================== */
+ 
   const cloudStart = document.getElementById("cloud-start");
   const cloudHappy = document.getElementById("cloud-happy");
   const cloudAngry = document.getElementById("cloud-angry");
@@ -54,9 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   playerLabel.textContent = playerName;
   scoreEl.textContent = score;
 
-  /* =====================
-     TIMER (OLD)
-  ===================== */
+ 
   let timerInterval;
   let timeLeft = 15;
 
@@ -76,9 +67,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }, 1000);
   }
 
-  /* =====================
-     LOAD QUESTIONS (NEW)
-  ===================== */
+ 
   async function startGame() {
     const res = await fetch(`${API}/api/questions/${topicId}`);
     questions = await res.json();
@@ -90,9 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadQuestion();
   }
 
-  /* =====================
-     LOAD QUESTION (OLD+NEW)
-  ===================== */
+ 
   function loadQuestion() {
     locked = false;
     startTimer();
@@ -121,9 +108,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     rain.classList.add("hidden");
   }
 
-  /* =====================
-     ANSWER CLICK (OLD+NEW)
-  ===================== */
+
   answerBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       if (locked) return;
@@ -155,9 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  /* =====================
-     FINISH GAME (OLD STYLE)
-  ===================== */
+
  async function finishGame() {
   clearInterval(timerInterval);
 
@@ -172,7 +155,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.querySelector(".paper.big").classList.add("final");
 
-  // ✅ RESULT SAQLASH
+
   await fetch(`${API}/api/result`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -183,20 +166,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     })
   });
 
-  // ✅ RESTART TUGMASINI KO‘RSATISH
+
   restartBtn.classList.remove("hidden");
 
-  // ✅ NATIJALARNI YUKLASH (agar bo‘lsa)
+ 
   loadResults();
 }
 
 const restartBtn  = document.getElementById("restartBtn");
 
 restartBtn.addEventListener("click", () => {
-  // topic saqlanib qolsin
+ 
   localStorage.removeItem("topicId");
 
-  // login / topic sahifaga qaytadi
+ 
   window.location.href = "login.html";
 });
 
@@ -218,9 +201,7 @@ async function loadResults() {
   document.querySelector(".results").classList.remove("hidden");
 }
 
-  /* =====================
-     INIT
-  ===================== */
+  
   startGame();
 
 });

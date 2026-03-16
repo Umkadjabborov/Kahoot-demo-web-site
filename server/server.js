@@ -111,12 +111,12 @@ app.get("/api/results", (req, res) => {
   );
 });
 
-/* =========================
-   SERVER
-========================= */
+
+//  SERVER
+
 app.listen(PORT, () => {
   console.log(`✅ Backend running on http://localhost:${PORT}`);
 });
-/* =====================
-   FETCH QUESTIONS (MOD)
-===================== */
+
+//  FETCH QUESTIONS (MOD)
+
